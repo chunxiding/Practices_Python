@@ -1,0 +1,27 @@
+class Solution(object):
+    def searchInsert(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        
+        def binarySearch(nums, target, start, end):
+            if end-start+1 <= 0:
+                return end
+            mid = start+(end-start)//2
+            if nums[mid]==target:
+                return mid
+            else:
+                if target<nums[mid]:
+                    return binarySearch(nums,target, start, mid-1)
+                else:
+	                return binarySearch(nums,target, mid+1, end)
+        
+        res = binarySearch(nums, target, 0, len(nums)-1)
+        if res < 0:
+            return 0
+        if nums[res] == target:
+            return res
+        else:
+            return res+1
